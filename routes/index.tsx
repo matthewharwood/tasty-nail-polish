@@ -7,6 +7,8 @@ import NavigationModals from "../islands/NavigationModals.tsx";
 import VideoPlayer from "../islands/VideoPlayer.tsx";
 import FeaturePills from "../islands/FeaturePills.tsx";
 import FAQAccordion from "../islands/FAQAccordion.tsx";
+import ReviewButtons from "../islands/ReviewButtons.tsx";
+import Footer from "../islands/Footer.tsx";
 
 export default define.page(function Home() {
   return (
@@ -123,12 +125,11 @@ export default define.page(function Home() {
         {/* FAQ Section */}
         <FAQAccordion />
 
+        {/* Review Buttons */}
+        <ReviewButtons />
+
         {/* Footer */}
-        <footer class="footer">
-          <p class="footer-text">
-            Built for Speed • Ready for Scale • Powered by Deno
-          </p>
-        </footer>
+        <Footer />
 
         {/* Navigation Modals */}
         <NavigationModals />
