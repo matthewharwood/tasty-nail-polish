@@ -5,7 +5,9 @@
       "Bash(curl:*)",
       "Bash(python:*)",
       "Bash(npm install:*)",
-      "Bash(echo:*)"
+      "Bash(echo:*)",
+      "Bash(findstr:*)",
+      "Bash(deno serve:*)"
     ],
     "deny": [],
     "ask": []

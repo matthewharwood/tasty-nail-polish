@@ -46,6 +46,7 @@ export const handler: Handlers = {
         description: product.description,
         images: product.images,
         price: price ? {
+          id: price.id,
           amount: price.unit_amount,
           currency: price.currency,
           formatted: new Intl.NumberFormat('en-US', {

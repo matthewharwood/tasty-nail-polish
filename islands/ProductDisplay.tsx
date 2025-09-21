@@ -6,6 +6,7 @@ interface Product {
   description: string;
   images: string[];
   price: {
+    id: string;
     amount: number;
     currency: string;
     formatted: string;
@@ -17,6 +18,7 @@ export default function ProductDisplay() {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
 
   useEffect(() => {
     async function fetchProduct() {
@@ -41,6 +43,35 @@ export default function ProductDisplay() {
 
     fetchProduct();
   }, []);
+
+  async function handleCheckout() {
+    if (!product?.price?.id) return;
+
+    setCheckoutLoading(true);
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ priceId: product.price.id }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create checkout session");
+      }
+
+      const { url } = await response.json();
+      if (url) {
+        window.location.href = url;
+      }
+    } catch (err) {
+      console.error("Checkout error:", err);
+      alert("Failed to start checkout. Please try again.");
+    } finally {
+      setCheckoutLoading(false);
+    }
+  }
 
   if (loading) {
     return (
@@ -116,6 +147,21 @@ export default function ProductDisplay() {
         <div class="mt-6 text-xs text-gray-500 text-center">
           <p>Fetched from Stripe Test Mode</p>
         </div>
+
+        {product.active && product.price && (
+          <div class="mt-8">
+            <button
+              onClick={handleCheckout}
+              disabled={checkoutLoading}
+              class="w-full bg-black text-white py-3 px-6 rounded hover:bg-gray-800 disabled:bg-gray-400"
+            >
+              {checkoutLoading ? "Loading..." : `Buy Now - ${product.price.formatted}`}
+            </button>
+            <p class="text-xs text-gray-500 text-center mt-2">
+              Test Card: 4242 4242 4242 4242
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
