@@ -2,6 +2,7 @@ import { Head } from "fresh/runtime";
 import { define } from "../utils.ts";
 import ProductDisplay from "../islands/ProductDisplay.tsx";
 import FloatingDecorations from "../islands/FloatingDecorations.tsx";
+import CountdownTimer from "../islands/CountdownTimer.tsx";
 
 export default define.page(function Home() {
   return (
@@ -13,6 +14,36 @@ export default define.page(function Home() {
       </Head>
 
       <div class="page-wrapper">
+        {/* Global Navigation */}
+        <nav class="global-nav">
+          <div class="nav-container">
+            {/* Brand Logo */}
+            <div class="nav-brand">
+              <img src="/foot.png" alt="" class="nav-logo" />
+              <span class="nav-brand-text">
+                <span class="brand-cherry">🍒</span>
+                LICKABLE
+              </span>
+            </div>
+
+            {/* Navigation Links */}
+            <div class="nav-links">
+              <a href="#" class="nav-link nav-link--active">Shop</a>
+              <a href="#" class="nav-link">About</a>
+              <a href="#" class="nav-link">Ingredients</a>
+              <a href="#" class="nav-link">Reviews</a>
+            </div>
+
+            {/* Promo Countdown */}
+            <div class="nav-promo">
+              <div class="promo-badge">
+                <span class="promo-text">50% OFF</span>
+                <CountdownTimer />
+              </div>
+            </div>
+          </div>
+        </nav>
+
         {/* Floating Decorations with Parallax */}
         <FloatingDecorations />
 
