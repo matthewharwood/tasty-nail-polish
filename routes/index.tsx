@@ -3,6 +3,7 @@ import { define } from "../utils.ts";
 import ProductDisplay from "../islands/ProductDisplay.tsx";
 import FloatingDecorations from "../islands/FloatingDecorations.tsx";
 import CountdownTimer from "../islands/CountdownTimer.tsx";
+import NavigationModals from "../islands/NavigationModals.tsx";
 
 export default define.page(function Home() {
   return (
@@ -28,10 +29,10 @@ export default define.page(function Home() {
 
             {/* Navigation Links */}
             <div class="nav-links">
-              <a href="#" class="nav-link nav-link--active">Shop</a>
-              <a href="#" class="nav-link">About</a>
-              <a href="#" class="nav-link">Ingredients</a>
-              <a href="#" class="nav-link">Reviews</a>
+              <a href="#shop" class="nav-link nav-link--active">Shop</a>
+              <a href="#about" class="nav-link">About</a>
+              <a href="#ingredients" class="nav-link">Ingredients</a>
+              <a href="#reviews" class="nav-link">Reviews</a>
             </div>
 
             {/* Promo Countdown */}
@@ -99,6 +100,9 @@ export default define.page(function Home() {
             Built for Speed • Ready for Scale • Powered by Deno
           </p>
         </footer>
+
+        {/* Navigation Modals */}
+        <NavigationModals />
       </div>
     </>
   );
