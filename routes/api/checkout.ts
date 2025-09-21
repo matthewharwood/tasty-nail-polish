@@ -1,20 +1,38 @@
 import { Handlers } from "fresh/server.ts";
 
 export const handler: Handlers = {
-  async POST(req, ctx) {
+  async POST(req) {
     try {
       const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
       if (!stripeKey) {
-        return Response.json({ error: "Stripe key not configured" }, { status: 500 });
+        return new Response(JSON.stringify({ error: "Stripe key not configured" }), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
-      // In Fresh, the actual Request object is the first parameter
-      // Read the body directly
-      const body = await req.json();
-      const { priceId } = body;
+      // Read body as stream - Fresh 2.5 production compatible
+      const decoder = new TextDecoder();
+      let bodyText = "";
+
+      for await (const chunk of req.body) {
+        bodyText += decoder.decode(chunk);
+      }
+
+      if (!bodyText) {
+        return new Response(JSON.stringify({ error: "No request body" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      const { priceId } = JSON.parse(bodyText);
 
       if (!priceId) {
-        return Response.json({ error: "Price ID required" }, { status: 400 });
+        return new Response(JSON.stringify({ error: "Price ID required" }), {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       // Get the site URL from request
@@ -42,16 +60,24 @@ export const handler: Handlers = {
       if (!sessionResponse.ok) {
         const error = await sessionResponse.text();
         console.error("Stripe error:", error);
-        return Response.json({ error: `Stripe error: ${error}` }, { status: 500 });
+        return new Response(JSON.stringify({ error: `Failed to create checkout session` }), {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       const session = await sessionResponse.json();
       console.log("Checkout session created:", session.id, "URL:", session.url);
 
-      return Response.json({ url: session.url });
+      return new Response(JSON.stringify({ url: session.url }), {
+        headers: { "Content-Type": "application/json" },
+      });
     } catch (error) {
       console.error("Error creating checkout session:", error);
-      return Response.json({ error: error.message }, { status: 500 });
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      });
     }
   },
 };
