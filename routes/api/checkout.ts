@@ -1,7 +1,7 @@
 import { Handlers } from "fresh/server.ts";
 
 export const handler: Handlers = {
-  async POST(req) {
+  async POST(req, ctx) {
     try {
       const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
       if (!stripeKey) {
@@ -11,22 +11,12 @@ export const handler: Handlers = {
         });
       }
 
-      // Read body as stream - Fresh 2.5 production compatible
-      const decoder = new TextDecoder();
-      let bodyText = "";
+      // The actual Request object is in req.req
+      const request = req.req || req;
 
-      for await (const chunk of req.body) {
-        bodyText += decoder.decode(chunk);
-      }
-
-      if (!bodyText) {
-        return new Response(JSON.stringify({ error: "No request body" }), {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        });
-      }
-
-      const { priceId } = JSON.parse(bodyText);
+      // Read the body using the standard Request API
+      const body = await request.json();
+      const { priceId } = body;
 
       if (!priceId) {
         return new Response(JSON.stringify({ error: "Price ID required" }), {
@@ -36,7 +26,7 @@ export const handler: Handlers = {
       }
 
       // Get the site URL from request
-      const url = new URL(req.url);
+      const url = new URL(request.url);
       const siteUrl = `${url.protocol}//${url.host}`;
 
       console.log("Creating checkout session for price:", priceId);
