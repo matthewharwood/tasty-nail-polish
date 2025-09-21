@@ -4,6 +4,7 @@ import ProductDisplay from "../islands/ProductDisplay.tsx";
 import FloatingDecorations from "../islands/FloatingDecorations.tsx";
 import CountdownTimer from "../islands/CountdownTimer.tsx";
 import NavigationModals from "../islands/NavigationModals.tsx";
+import VideoPlayer from "../islands/VideoPlayer.tsx";
 
 export default define.page(function Home() {
   return (
@@ -88,6 +89,9 @@ export default define.page(function Home() {
             <span class="feature-pill feature-pill--mint">🌱 Vegan</span>
           </div>
         </header>
+
+        {/* Video Player Section */}
+        <VideoPlayer />
 
         {/* Product Display Section */}
         <main class="main-content">
