@@ -5,6 +5,7 @@ import FloatingDecorations from "../islands/FloatingDecorations.tsx";
 import CountdownTimer from "../islands/CountdownTimer.tsx";
 import NavigationModals from "../islands/NavigationModals.tsx";
 import VideoPlayer from "../islands/VideoPlayer.tsx";
+import FeaturePills from "../islands/FeaturePills.tsx";
 
 export default define.page(function Home() {
   return (
@@ -107,12 +108,7 @@ export default define.page(function Home() {
           </p>
 
           {/* Feature Pills */}
-          <div class="feature-pills">
-            <span class="feature-pill feature-pill--pink">💅 Food-Safe</span>
-            <span class="feature-pill feature-pill--mint">🍒 Real Cherry</span>
-            <span class="feature-pill feature-pill--pink">✨ Non-Toxic</span>
-            <span class="feature-pill feature-pill--mint">🌱 Vegan</span>
-          </div>
+          <FeaturePills />
         </header>
 
         {/* Video Player Section */}

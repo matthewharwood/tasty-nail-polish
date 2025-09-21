@@ -520,6 +520,15 @@
     }
 }
 
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        transform: translateY(-4px) scale(1.1);
+    }
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .marquee-container {
@@ -636,6 +645,87 @@
     background: var(--color-accent-mint);
     color: var(--color-black);
     transform: rotate(1deg);
+}
+
+/* Feature Pill Tooltips */
+.feature-pill-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.feature-pill-tooltip {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -100%);
+    animation: tooltip-bounce 0.3s ease-out;
+}
+
+@keyframes tooltip-bounce {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -80%) scale(0.8) rotate(-5deg);
+    }
+    50% {
+        transform: translate(-50%, -105%) scale(1.05) rotate(3deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -100%) scale(1) rotate(0deg);
+    }
+}
+
+.tooltip-content {
+    position: relative;
+    background: var(--color-white);
+    border: 5px solid var(--color-black);
+    box-shadow:
+        0 0 0 2px var(--color-cherry-red),
+        8px 8px 0 var(--color-black),
+        8px 8px 0 2px var(--color-cherry-red);
+    padding: var(--space-3);
+    min-width: 200px;
+    transform: rotate(-2deg);
+    transition: transform 0.2s ease;
+}
+
+.tooltip-content:hover {
+    transform: rotate(2deg) scale(1.05);
+}
+
+.tooltip-content::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid var(--color-black);
+}
+
+.tooltip-content::before {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--color-white);
+    z-index: 1;
+}
+
+.tooltip-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border: 2px solid var(--color-black);
+    box-shadow: 4px 4px 0 var(--color-cherry-pink);
 }
 
 /* ======================
