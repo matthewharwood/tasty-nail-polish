@@ -13,7 +13,10 @@
       "Bash(taskkill:*)",
       "WebFetch(domain:fresh.deno.dev)",
       "WebFetch(domain:github.com)",
-      "WebFetch(domain:stackoverflow.com)"
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:goshippo.com)",
+      "WebFetch(domain:www.stash.gg)",
+      "WebFetch(domain:gumroad.com)"
     ],
     "deny": [],
     "ask": []

@@ -75,11 +75,11 @@ export default function ProductDisplay() {
 
   if (loading) {
     return (
-      <div class="max-w-2xl mx-auto p-6">
-        <div class="animate-pulse">
-          <div class="h-8 bg-gray-200 rounded w-1/2 mb-4"></div>
-          <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
-          <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+      <div class="container">
+        <div class="loading-skeleton">
+          <div class="skeleton-block skeleton-large"></div>
+          <div class="skeleton-block skeleton-medium"></div>
+          <div class="skeleton-block skeleton-small"></div>
         </div>
       </div>
     );
@@ -87,11 +87,13 @@ export default function ProductDisplay() {
 
   if (error) {
     return (
-      <div class="max-w-2xl mx-auto p-6">
-        <div class="bg-red-50 border border-red-300 text-red-700 p-4 rounded">
-          <h3 class="font-bold mb-2">Error Loading Product</h3>
-          <p>{error}</p>
-          <p class="text-sm mt-2">Make sure you've added your Stripe test keys to your .env file</p>
+      <div class="container">
+        <div class="error-box">
+          <h3 class="error-title">Error Loading Product</h3>
+          <p class="error-message">{error}</p>
+          <p class="error-hint">
+            Make sure you've added your Stripe test keys to your .env file
+          </p>
         </div>
       </div>
     );
@@ -99,66 +101,85 @@ export default function ProductDisplay() {
 
   if (!product) {
     return (
-      <div class="max-w-2xl mx-auto p-6">
-        <p>No product data available</p>
+      <div class="container">
+        <p class="no-data">No product data available</p>
       </div>
     );
   }
 
   return (
-    <div class="max-w-2xl mx-auto p-6">
-      <div class="bg-white rounded-lg shadow-lg p-8">
-        <div class="mb-6">
-          <span class="inline-block bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full uppercase font-semibold tracking-wide mb-2">
-            {product.active ? "Active" : "Inactive"}
+    <div class="container">
+      <div class="product-card">
+        {/* Status Badge */}
+        <div class="product-section">
+          <span class="status-badge">
+            {product.active ? "In Stock" : "Out of Stock"}
           </span>
-          <h2 class="text-3xl font-bold text-gray-900 mb-2">{product.name}</h2>
-          <p class="text-gray-600">{product.description}</p>
+
+          <h2 class="product-name">{product.name}</h2>
+          <p class="product-description">{product.description}</p>
         </div>
 
+        {/* Price Display */}
         {product.price && (
-          <div class="border-t pt-6">
-            <div class="flex items-baseline">
-              <span class="text-4xl font-bold text-gray-900">
-                {product.price.formatted}
-              </span>
+          <div class="price-section">
+            <div class="price-display">
+              <span class="price-amount">{product.price.formatted}</span>
+              <span class="price-unit">/ bottle</span>
             </div>
           </div>
         )}
 
-        <div class="mt-8 p-4 bg-gray-50 rounded">
-          <h3 class="text-sm font-semibold text-gray-700 mb-2">Product Details</h3>
-          <dl class="text-sm">
-            <div class="flex justify-between py-1">
-              <dt class="text-gray-500">Product ID:</dt>
-              <dd class="font-mono text-xs text-gray-700">{product.id}</dd>
+        {/* Product Details */}
+        <div class="product-details">
+          <div class="product-details-label">
+            <h3 class="product-details-title">Product Info</h3>
+          </div>
+
+          <dl class="product-details-list">
+            <div class="product-detail-row">
+              <dt class="product-detail-label">Product ID:</dt>
+              <dd class="product-detail-value product-detail-id">
+                {product.id}
+              </dd>
             </div>
-            <div class="flex justify-between py-1">
-              <dt class="text-gray-500">Currency:</dt>
-              <dd class="text-gray-700">{product.price?.currency.toUpperCase()}</dd>
+            <div class="product-detail-row">
+              <dt class="product-detail-label">Currency:</dt>
+              <dd class="product-detail-value">
+                {product.price?.currency}
+              </dd>
             </div>
-            <div class="flex justify-between py-1">
-              <dt class="text-gray-500">Status:</dt>
-              <dd class="text-gray-700">{product.active ? "Available" : "Unavailable"}</dd>
+            <div class="product-detail-row">
+              <dt class="product-detail-label">Status:</dt>
+              <dd class="product-detail-value">
+                {product.active ? "Available" : "Unavailable"}
+              </dd>
             </div>
           </dl>
         </div>
 
-        <div class="mt-6 text-xs text-gray-500 text-center">
-          <p>Fetched from Stripe Test Mode</p>
+        {/* Test Mode Notice */}
+        <div class="stripe-test-notice">
+          <p class="stripe-test-text">⚡ Stripe Test Mode Active ⚡</p>
         </div>
 
+        {/* Buy Button */}
         {product.active && product.price && (
-          <div class="mt-8">
+          <div>
             <button
               onClick={handleCheckout}
               disabled={checkoutLoading}
-              class="w-full bg-black text-white py-3 px-6 rounded hover:bg-gray-800 disabled:bg-gray-400"
+              class="buy-button"
             >
-              {checkoutLoading ? "Loading..." : `Buy Now - ${product.price.formatted}`}
+              {checkoutLoading ? (
+                <span>Processing...</span>
+              ) : (
+                <span>Buy Now → {product.price.formatted}</span>
+              )}
             </button>
-            <p class="text-xs text-gray-500 text-center mt-2">
-              Test Card: 4242 4242 4242 4242
+
+            <p class="test-card-notice">
+              💳 Test Card: 4242 4242 4242 4242
             </p>
           </div>
         )}

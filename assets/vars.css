@@ -1,0 +1,332 @@
+/*
+ * TASTY NAIL POLISH - Design System
+ * Neo-brutalist design with high-fashion cherry aesthetic
+ * Inspired by Shippo, Stash.gg, and Gumroad
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Crimson+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,400&display=swap');
+
+:root {
+  /* ======================
+     COLOR PALETTE
+     Cherry-inspired with neo-brutalist contrast
+     ====================== */
+
+  /* Primary Colors - Cherry Theme */
+  --color-cherry-red: #D2042D;
+  --color-cherry-dark: #8B0020;
+  --color-cherry-light: #FF6B9D;
+  --color-cherry-pink: #FFC8DD;
+  --color-cherry-blush: #FFE5EC;
+
+  /* Neutral Palette */
+  --color-black: #0A0A0A;
+  --color-ink: #1A1A1A;
+  --color-charcoal: #2D2D2D;
+  --color-gray-900: #404040;
+  --color-gray-700: #666666;
+  --color-gray-500: #999999;
+  --color-gray-300: #CCCCCC;
+  --color-gray-100: #E6E6E6;
+  --color-gray-50: #F5F5F5;
+  --color-white: #FFFFFF;
+  --color-cream: #FFFEF7;
+
+  /* Accent Colors - Neo-brutalist */
+  --color-accent-yellow: #FFD93D;
+  --color-accent-mint: #6BCF7F;
+  --color-accent-blue: #4ECDC4;
+  --color-accent-purple: #C77DFF;
+  --color-accent-orange: #FF9F1C;
+
+  /* Semantic Colors */
+  --color-success: var(--color-accent-mint);
+  --color-warning: var(--color-accent-yellow);
+  --color-error: var(--color-cherry-red);
+  --color-info: var(--color-accent-blue);
+
+  /* ======================
+     TYPOGRAPHY
+     Space Grotesk (Neo-brutalist) + Crimson Pro (High fashion)
+     ====================== */
+
+  /* Font Families */
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Crimson Pro', Georgia, 'Times New Roman', serif;
+  --font-mono: 'Courier Prime', 'Courier New', monospace;
+
+  /* Font Sizes - Fluid Typography */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 1.875rem);
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.25rem);
+  --text-4xl: clamp(2.25rem, 1.8rem + 2.25vw, 3rem);
+  --text-5xl: clamp(3rem, 2.4rem + 3vw, 3.75rem);
+  --text-6xl: clamp(3.75rem, 3rem + 3.75vw, 4.5rem);
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* Line Heights */
+  --leading-none: 1;
+  --leading-tight: 1.25;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+  --leading-loose: 2;
+
+  /* Letter Spacing */
+  --tracking-tighter: -0.05em;
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+  --tracking-widest: 0.1em;
+
+  /* ======================
+     SPACING SYSTEM
+     Based on 8px grid
+     ====================== */
+
+  --space-0: 0;
+  --space-px: 1px;
+  --space-0-5: 0.125rem;  /* 2px */
+  --space-1: 0.25rem;     /* 4px */
+  --space-1-5: 0.375rem;  /* 6px */
+  --space-2: 0.5rem;      /* 8px */
+  --space-2-5: 0.625rem;  /* 10px */
+  --space-3: 0.75rem;     /* 12px */
+  --space-4: 1rem;        /* 16px */
+  --space-5: 1.25rem;     /* 20px */
+  --space-6: 1.5rem;      /* 24px */
+  --space-7: 1.75rem;     /* 28px */
+  --space-8: 2rem;        /* 32px */
+  --space-10: 2.5rem;     /* 40px */
+  --space-12: 3rem;       /* 48px */
+  --space-16: 4rem;       /* 64px */
+  --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
+  --space-32: 8rem;       /* 128px */
+
+  /* ======================
+     BORDERS & RADIUS
+     Neo-brutalist sharp + selective curves
+     ====================== */
+
+  --radius-none: 0;
+  --radius-sm: 0.125rem;  /* 2px */
+  --radius-base: 0.25rem; /* 4px */
+  --radius-md: 0.375rem;  /* 6px */
+  --radius-lg: 0.5rem;    /* 8px */
+  --radius-xl: 0.75rem;   /* 12px */
+  --radius-2xl: 1rem;     /* 16px */
+  --radius-3xl: 1.5rem;   /* 24px */
+  --radius-full: 9999px;
+
+  /* Border Widths */
+  --border-0: 0;
+  --border-1: 1px;
+  --border-2: 2px;
+  --border-3: 3px;
+  --border-4: 4px;
+  --border-6: 6px;
+  --border-8: 8px;
+
+  /* ======================
+     SHADOWS
+     Neo-brutalist offset shadows
+     ====================== */
+
+  --shadow-sharp-sm: 2px 2px 0px var(--color-black);
+  --shadow-sharp-md: 4px 4px 0px var(--color-black);
+  --shadow-sharp-lg: 6px 6px 0px var(--color-black);
+  --shadow-sharp-xl: 8px 8px 0px var(--color-black);
+
+  --shadow-color-sm: 2px 2px 0px var(--color-cherry-red);
+  --shadow-color-md: 4px 4px 0px var(--color-cherry-red);
+  --shadow-color-lg: 6px 6px 0px var(--color-cherry-red);
+
+  --shadow-soft-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-soft-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-soft-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-soft-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+
+  /* ======================
+     TRANSITIONS
+     Smooth micro-interactions
+     ====================== */
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+  --transition-slower: 500ms ease;
+
+  /* Easing Functions */
+  --ease-linear: linear;
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* ======================
+     Z-INDEX SCALE
+     ====================== */
+
+  --z-negative: -1;
+  --z-0: 0;
+  --z-10: 10;
+  --z-20: 20;
+  --z-30: 30;
+  --z-40: 40;
+  --z-50: 50;
+  --z-60: 60;
+  --z-70: 70;
+  --z-80: 80;
+  --z-90: 90;
+  --z-100: 100;
+  --z-max: 9999;
+
+  /* ======================
+     LAYOUT
+     Container and grid systems
+     ====================== */
+
+  --container-xs: 20rem;    /* 320px */
+  --container-sm: 24rem;    /* 384px */
+  --container-md: 28rem;    /* 448px */
+  --container-lg: 32rem;    /* 512px */
+  --container-xl: 36rem;    /* 576px */
+  --container-2xl: 42rem;   /* 672px */
+  --container-3xl: 48rem;   /* 768px */
+  --container-4xl: 56rem;   /* 896px */
+  --container-5xl: 64rem;   /* 1024px */
+  --container-6xl: 72rem;   /* 1152px */
+  --container-7xl: 80rem;   /* 1280px */
+
+  /* Grid Gaps */
+  --gap-xs: var(--space-2);
+  --gap-sm: var(--space-4);
+  --gap-md: var(--space-6);
+  --gap-lg: var(--space-8);
+  --gap-xl: var(--space-12);
+}
+
+/* ======================
+   GLOBAL STYLES
+   Base typography and resets
+   ====================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-ink);
+  background-color: var(--color-cream);
+}
+
+/* Typography Base Classes */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: var(--font-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-black);
+}
+
+h1 {
+  font-size: var(--text-5xl);
+  font-weight: var(--font-black);
+}
+
+h2 {
+  font-size: var(--text-4xl);
+}
+
+h3 {
+  font-size: var(--text-3xl);
+}
+
+h4 {
+  font-size: var(--text-2xl);
+}
+
+h5 {
+  font-size: var(--text-xl);
+}
+
+h6 {
+  font-size: var(--text-lg);
+}
+
+p {
+  margin-bottom: var(--space-4);
+}
+
+a {
+  color: var(--color-cherry-red);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-cherry-dark);
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--font-display);
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+/* Utility Classes */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Neo-brutalist Elements */
+.neo-brutal-border {
+  border: var(--border-3) solid var(--color-black);
+}
+
+.neo-brutal-shadow {
+  box-shadow: var(--shadow-sharp-md);
+}
+
+.neo-brutal-shadow-hover {
+  transition: all var(--transition-base);
+}
+
+.neo-brutal-shadow-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-sharp-lg);
+}
