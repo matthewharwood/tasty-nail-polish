@@ -6,6 +6,7 @@ import CountdownTimer from "../islands/CountdownTimer.tsx";
 import NavigationModals from "../islands/NavigationModals.tsx";
 import VideoPlayer from "../islands/VideoPlayer.tsx";
 import FeaturePills from "../islands/FeaturePills.tsx";
+import FAQAccordion from "../islands/FAQAccordion.tsx";
 
 export default define.page(function Home() {
   return (
@@ -118,6 +119,9 @@ export default define.page(function Home() {
         <main class="main-content">
           <ProductDisplay />
         </main>
+
+        {/* FAQ Section */}
+        <FAQAccordion />
 
         {/* Footer */}
         <footer class="footer">
