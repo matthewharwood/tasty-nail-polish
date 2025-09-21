@@ -1,6 +1,7 @@
 import { Head } from "fresh/runtime";
 import { define } from "../utils.ts";
 import ProductDisplay from "../islands/ProductDisplay.tsx";
+import FloatingDecorations from "../islands/FloatingDecorations.tsx";
 
 export default define.page(function Home() {
   return (
@@ -12,6 +13,9 @@ export default define.page(function Home() {
       </Head>
 
       <div class="page-wrapper">
+        {/* Floating Decorations with Parallax */}
+        <FloatingDecorations />
+
         {/* Background Pattern */}
         <div class="background-pattern"></div>
 
@@ -24,16 +28,15 @@ export default define.page(function Home() {
 
           {/* Main Title */}
           <h1 class="main-title">
-            <span class="title-shadow">
-              <span class="title-shadow-text">Tasty</span>
-              <span class="title-shadow-duplicate">Tasty</span>
-            </span>
-            {" "}
-            <span class="title-accent">Nail</span>
-            {" "}
-            <span class="title-shadow">
-              <span class="title-shadow-text">Polish</span>
-              <span class="title-shadow-duplicate">Polish</span>
+            <span className="">👄</span>
+            <span className="title-shadow">
+              <span className="title-shadow-text">Tasty</span>
+              <span className="title-shadow-duplicate">Tasty</span>
+            </span>{" "}
+            <span className="title-accent">Nail</span>{" "}
+            <span className="title-shadow">
+              <span className="title-shadow-text">Polish</span>
+              <span className="title-shadow-duplicate">Polish</span>
             </span>
           </h1>
 
