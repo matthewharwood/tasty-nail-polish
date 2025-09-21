@@ -49,96 +49,110 @@
   overflow: hidden;
 }
 
+/* Hide floating decorations on mobile devices */
+@media (max-width: 768px) {
+  .floating-decorations {
+    display: none;
+  }
+}
+
+/* Also hide on landscape mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+  .floating-decorations {
+    display: none;
+  }
+}
+
 .floating-element {
   position: absolute;
-  opacity: 0.15;
   transition: transform 0.3s ease-out;
   will-change: transform;
+  mix-blend-mode: multiply;
 }
 
 /* Cherry emojis */
 .cherry-1 {
-  font-size: 3rem;
+  font-size: 6rem;
   top: 10%;
   left: 5%;
-  transform: rotate(-15deg);
+  transform: rotate(-25deg);
   animation: floatSlow 20s ease-in-out infinite;
 }
 
 .cherry-2 {
-  font-size: 2rem;
+  font-size: 4rem;
   top: 25%;
   right: 8%;
-  transform: rotate(25deg);
+  transform: rotate(45deg);
   animation: floatMedium 15s ease-in-out infinite;
 }
 
 .cherry-3 {
-  font-size: 4rem;
+  font-size: 8rem;
   top: 60%;
   left: 10%;
-  transform: rotate(-30deg);
+  transform: rotate(-60deg);
   animation: floatSlow 25s ease-in-out infinite reverse;
 }
 
 .cherry-4 {
-  font-size: 2.5rem;
+  font-size: 5rem;
   top: 45%;
   right: 15%;
-  transform: rotate(45deg);
+  transform: rotate(70deg);
   animation: floatMedium 18s ease-in-out infinite;
 }
 
 .cherry-5 {
-  font-size: 3.5rem;
+  font-size: 7rem;
   top: 75%;
   left: 85%;
-  transform: rotate(-45deg);
+  transform: rotate(-80deg);
   animation: floatSlow 22s ease-in-out infinite;
 }
 
 .cherry-6 {
-  font-size: 2rem;
+  font-size: 4rem;
   top: 85%;
   left: 45%;
-  transform: rotate(15deg);
+  transform: rotate(35deg);
   animation: floatMedium 17s ease-in-out infinite reverse;
 }
 
 /* Foot images */
 .foot-1 {
-  width: 120px;
+  width: 240px;
   height: auto;
   top: 15%;
   left: 70%;
-  transform: rotate(10deg);
+  transform: rotate(20deg);
   animation: floatSlow 23s ease-in-out infinite;
 }
 
 .foot-2 {
-  width: 80px;
+  width: 160px;
   height: auto;
   top: 50%;
   left: 25%;
-  transform: rotate(-20deg) scaleX(-1);
+  transform: rotate(-40deg) scaleX(-1);
   animation: floatMedium 19s ease-in-out infinite reverse;
 }
 
 .foot-3 {
-  width: 100px;
+  width: 200px;
   height: auto;
   top: 70%;
-  right: 5%;
-  transform: rotate(30deg);
+  right: 20%;
+  transform: rotate(55deg);
   animation: floatSlow 21s ease-in-out infinite;
 }
 
 .foot-4 {
-  width: 60px;
+  width: 120px;
   height: auto;
   top: 35%;
   left: 50%;
-  transform: rotate(-10deg) scaleX(-1);
+  transform: rotate(-30deg) scaleX(-1);
   animation: floatMedium 16s ease-in-out infinite reverse;
 }
 
@@ -148,13 +162,13 @@
     transform: translateY(0) translateX(0) rotate(var(--rotation, 0deg));
   }
   25% {
-    transform: translateY(-10px) translateX(5px) rotate(calc(var(--rotation, 0deg) + 5deg));
+    transform: translateY(-10px) translateX(5px) rotate(calc(var(--rotation, 0deg) + 10deg));
   }
   50% {
-    transform: translateY(5px) translateX(-3px) rotate(calc(var(--rotation, 0deg) - 3deg));
+    transform: translateY(5px) translateX(-3px) rotate(calc(var(--rotation, 0deg) - 8deg));
   }
   75% {
-    transform: translateY(-5px) translateX(-5px) rotate(calc(var(--rotation, 0deg) + 3deg));
+    transform: translateY(-5px) translateX(-5px) rotate(calc(var(--rotation, 0deg) + 6deg));
   }
 }
 
@@ -163,24 +177,35 @@
     transform: translateY(0) translateX(0) rotate(var(--rotation, 0deg));
   }
   33% {
-    transform: translateY(8px) translateX(-6px) rotate(calc(var(--rotation, 0deg) - 5deg));
+    transform: translateY(8px) translateX(-6px) rotate(calc(var(--rotation, 0deg) - 12deg));
+  }
+  50% {
+    transform: translateY(-15px) translateX(3px) rotate(calc(var(--rotation, 0deg) + 8deg));
   }
   66% {
-    transform: translateY(-12px) translateX(4px) rotate(calc(var(--rotation, 0deg) + 7deg));
+    transform: translateY(-12px) translateX(4px) rotate(calc(var(--rotation, 0deg) + 15deg));
   }
 }
 
-/* Parallax data attributes for JS */
+/* Parallax data attributes for JS with depth effects */
 .parallax-slow {
   --parallax-speed: 0.5;
+  opacity: 0.3;
+  filter: blur(2px);
+  mix-blend-mode: soft-light;
 }
 
 .parallax-medium {
   --parallax-speed: 0.8;
+  opacity: 0.6;
+  filter: blur(0.5px);
+  mix-blend-mode: multiply;
 }
 
 .parallax-fast {
   --parallax-speed: 1.2;
+  opacity: 0.9;
+  mix-blend-mode: darken;
 }
 
 /* ======================
@@ -406,8 +431,17 @@
   }
 }
 
-.product-card:hover {
-  animation: liquidWave 3s ease-in-out infinite;
+/* Always animate on desktop, only on hover for mobile */
+@media (min-width: 769px) {
+  .product-card {
+    animation: liquidWave 3s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-card:hover {
+    animation: liquidWave 3s ease-in-out infinite;
+  }
 }
 
 /* Brush applicator (decorative) */

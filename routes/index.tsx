@@ -29,6 +29,7 @@ export default define.page(function Home() {
           {/* Main Title */}
           <h1 class="main-title">
             <span className="">👄</span>
+
             <span className="title-shadow">
               <span className="title-shadow-text">Tasty</span>
               <span className="title-shadow-duplicate">Tasty</span>
@@ -38,6 +39,7 @@ export default define.page(function Home() {
               <span className="title-shadow-text">Polish</span>
               <span className="title-shadow-duplicate">Polish</span>
             </span>
+            <span className="">🦶</span>
           </h1>
 
           {/* Tagline */}
