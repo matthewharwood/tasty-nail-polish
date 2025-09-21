@@ -54,9 +54,34 @@ export default define.page(function Home() {
 
         {/* Header Section */}
         <header class="header">
-          {/* Brand Badge */}
-          <div class="viral-badge">
-            🍒 Viral Sensation 2025
+          {/* Marquee Banner */}
+          <div class="marquee-container">
+            <div class="marquee-content">
+              <span class="marquee-item">
+                <span class="marquee-emoji">📦</span> FREE SHIPPING (THIS PRODUCT SHIPS FREE!)
+              </span>
+              <span class="marquee-separator">•</span>
+              <span class="marquee-item">
+                <span class="marquee-emoji">📦</span> FREE SHIPPING (THIS PRODUCT SHIPS FREE!)
+              </span>
+              <span class="marquee-separator">•</span>
+              <span class="marquee-item">
+                <span class="marquee-emoji">📦</span> FREE SHIPPING (THIS PRODUCT SHIPS FREE!)
+              </span>
+              <span class="marquee-separator">•</span>
+              <span class="marquee-item">
+                <span class="marquee-emoji">📦</span> FREE SHIPPING (THIS PRODUCT SHIPS FREE!)
+              </span>
+              <span class="marquee-separator">•</span>
+              <span class="marquee-item">
+                <span class="marquee-emoji">📦</span> FREE SHIPPING (THIS PRODUCT SHIPS FREE!)
+              </span>
+              <span class="marquee-separator">•</span>
+              <span class="marquee-item">
+                <span class="marquee-emoji">📦</span> FREE SHIPPING (THIS PRODUCT SHIPS FREE!)
+              </span>
+              <span class="marquee-separator">•</span>
+            </div>
           </div>
 
           {/* Main Title */}
