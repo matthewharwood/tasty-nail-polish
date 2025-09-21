@@ -156,15 +156,122 @@
 }
 
 /* ======================
-   PRODUCT CARD
+   PRODUCT CARD - NAIL POLISH BOTTLE SHAPE
    ====================== */
 
+.product-card-wrapper {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  padding-top: 80px; /* Space for the cap */
+}
+
 .product-card {
-  background: var(--color-white);
+  background: linear-gradient(
+    to bottom,
+    var(--color-white) 0%,
+    var(--color-white) 60%,
+    var(--color-cherry-blush) 60%,
+    var(--color-cherry-pink) 100%
+  );
   border: var(--border-4) solid var(--color-black);
   box-shadow: var(--shadow-sharp-lg);
   padding: var(--space-10);
   position: relative;
+
+  /* Create nail polish bottle silhouette */
+  border-radius: 140px 140px 30px 30px / 180px 180px 30px 30px;
+  padding-top: var(--space-16);
+  min-height: 500px;
+
+  /* Glass shine effect */
+  background-image:
+    linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.7) 45%,
+      transparent 50%
+    ),
+    linear-gradient(
+      to bottom,
+      var(--color-white) 0%,
+      var(--color-white) 65%,
+      var(--color-cherry-blush) 65%,
+      var(--color-cherry-pink) 100%
+    );
+  background-size: 100% 100%, 100% 100%;
+  overflow: visible;
+}
+
+/* Bottle cap container */
+.bottle-cap {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 90px;
+  z-index: 10;
+}
+
+/* Main cap body */
+.bottle-cap::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 70px;
+  background: var(--color-black);
+  border: var(--border-3) solid var(--color-black);
+  border-radius: 25px 25px 15px 15px;
+  box-shadow: var(--shadow-sharp-md);
+}
+
+/* Cap top detail */
+.bottle-cap::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 30px;
+  background: var(--color-cherry-red);
+  border: var(--border-3) solid var(--color-black);
+  border-radius: 15px 15px 5px 5px;
+  box-shadow: var(--shadow-sharp-sm);
+}
+
+/* Liquid level animation */
+@keyframes liquidWave {
+  0%, 100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-5px) rotate(-1deg);
+  }
+  75% {
+    transform: translateX(5px) rotate(1deg);
+  }
+}
+
+.product-card:hover {
+  animation: liquidWave 3s ease-in-out infinite;
+}
+
+/* Brush applicator (decorative) */
+.bottle-brush {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 50px;
+  background: var(--color-black);
+  border-radius: 2px;
+  opacity: 0.3;
 }
 
 .product-section {

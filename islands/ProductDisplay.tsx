@@ -109,9 +109,14 @@ export default function ProductDisplay() {
 
   return (
     <div class="container">
-      <div class="product-card">
-        {/* Status Badge */}
-        <div class="product-section">
+      <div class="product-card-wrapper">
+        <div class="product-card">
+          {/* Bottle Cap */}
+          <div class="bottle-cap"></div>
+          <div class="bottle-brush"></div>
+
+          {/* Status Badge */}
+          <div class="product-section">
           <span class="status-badge">
             {product.active ? "In Stock" : "Out of Stock"}
           </span>
@@ -183,6 +188,7 @@ export default function ProductDisplay() {
             </p>
           </div>
         )}
+        </div>
       </div>
     </div>
   );
