@@ -1,71 +1,74 @@
 import { Handlers } from "fresh/server.ts";
+import type {
+  ProductResponse,
+  StripePrice,
+  StripeProduct,
+} from "./_types.ts";
+import { PRODUCT_ID, STRIPE_API_BASE } from "./_types.ts";
+import {
+  errorResponse,
+  formatPrice,
+  getStripeKey,
+  jsonResponse,
+} from "./_utils.ts";
 
-export const handler: Handlers = {
-  async GET(_req) {
-    try {
-      const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
-      if (!stripeKey) {
-        return new Response(JSON.stringify({ error: "Stripe key not configured" }), {
-          status: 500,
-          headers: { "Content-Type": "application/json" },
-        });
-      }
+async function fetchStripeData<T>(
+  endpoint: string,
+  stripeKey: string,
+): Promise<T> {
+  const response = await fetch(`${STRIPE_API_BASE}/${endpoint}`, {
+    headers: { Authorization: `Bearer ${stripeKey}` },
+  });
 
-      const productId = "prod_T5qNxonixIvjVe";
+  if (!response.ok) {
+    throw new Error(`Failed to fetch ${endpoint}: ${response.status}`);
+  }
 
-      // Fetch product details directly from Stripe API
-      const productResponse = await fetch(`https://api.stripe.com/v1/products/${productId}`, {
-        headers: {
-          "Authorization": `Bearer ${stripeKey}`,
-        },
-      });
+  return response.json();
+}
 
-      if (!productResponse.ok) {
-        throw new Error(`Failed to fetch product: ${productResponse.status}`);
-      }
-
-      const product = await productResponse.json();
-
-      // Fetch prices for the product
-      const pricesResponse = await fetch(`https://api.stripe.com/v1/prices?product=${productId}&limit=1`, {
-        headers: {
-          "Authorization": `Bearer ${stripeKey}`,
-        },
-      });
-
-      if (!pricesResponse.ok) {
-        throw new Error(`Failed to fetch prices: ${pricesResponse.status}`);
-      }
-
-      const prices = await pricesResponse.json();
-      const price = prices.data[0];
-
-      const response = {
-        id: product.id,
-        name: product.name,
-        description: product.description,
-        images: product.images,
-        price: price ? {
+function transformProductData(
+  product: StripeProduct,
+  price?: StripePrice,
+): ProductResponse {
+  return {
+    id: product.id,
+    name: product.name,
+    description: product.description,
+    images: product.images,
+    active: product.active,
+    price: price
+      ? {
           id: price.id,
           amount: price.unit_amount,
           currency: price.currency,
-          formatted: new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: price.currency.toUpperCase(),
-          }).format((price.unit_amount || 0) / 100)
-        } : null,
-        active: product.active,
-      };
+          formatted: formatPrice(price.unit_amount || 0, price.currency),
+        }
+      : null,
+  };
+}
 
-      return new Response(JSON.stringify(response), {
-        headers: { "Content-Type": "application/json" },
-      });
+export const handler: Handlers = {
+  async GET() {
+    try {
+      const stripeKey = getStripeKey();
+      if (!stripeKey) {
+        return errorResponse("Stripe key not configured");
+      }
+
+      const [product, prices] = await Promise.all([
+        fetchStripeData<StripeProduct>(`products/${PRODUCT_ID}`, stripeKey),
+        fetchStripeData<{ data: StripePrice[] }>(
+          `prices?product=${PRODUCT_ID}&limit=1`,
+          stripeKey,
+        ),
+      ]);
+
+      const productData = transformProductData(product, prices.data[0]);
+      return jsonResponse(productData);
     } catch (error) {
-      console.error("Error fetching product:", error);
-      return new Response(JSON.stringify({ error: error.message }), {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      });
+      console.error("Product fetch error:", error);
+      return errorResponse(error.message);
     }
   },
 };
